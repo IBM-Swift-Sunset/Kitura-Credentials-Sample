@@ -57,8 +57,8 @@ let googleClientSecret = "Google client secret"
 
 let fbCredentials = CredentialsFacebook(clientId: fbClientId, clientSecret: fbClientSecret, callbackUrl: fbCallbackUrl)
 let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl)
-credentials.register(fbCredentials)
-credentials.register(googleCredentials)
+credentials.register(plugin: fbCredentials)
+credentials.register(plugin: googleCredentials)
 
 credentials.options["failureRedirect"] = "/login"
 credentials.options["successRedirect"] = "/private/data"
@@ -100,13 +100,13 @@ router.get("/login") { request, response, next in
 }
 
 router.get("/login/facebook",
-           handler: credentials.authenticate(fbCredentials.name))
+           handler: credentials.authenticate(credentialsType: fbCredentials.name))
 router.get("/login/google",
-           handler: credentials.authenticate(googleCredentials.name))
+           handler: credentials.authenticate(credentialsType: googleCredentials.name))
 router.get("/login/facebook/callback",
-           handler: credentials.authenticate(fbCredentials.name, failureRedirect: "/login"))
+           handler: credentials.authenticate(credentialsType: fbCredentials.name, failureRedirect: "/login"))
 router.get("/login/google/callback",
-           handler: credentials.authenticate(googleCredentials.name, failureRedirect: "/login"))
+           handler: credentials.authenticate(credentialsType: googleCredentials.name, failureRedirect: "/login"))
 
 
 
@@ -129,7 +129,7 @@ router.error { request, response, next in
 
 // A custom Not found handler
 router.all { request, response, next in
-    if  response.getStatusCode() == .NOT_FOUND  {
+    if  response.statusCode == .NOT_FOUND  {
         // Remove this wrapping if statement, if you want to handle requests to / as well
         if  request.originalUrl != "/"  &&  request.originalUrl != ""  {
             do {
@@ -144,7 +144,6 @@ router.all { request, response, next in
 }
 
 // Listen on port 8090
-let server = HttpServer.listen(8090,
-                               delegate: router)
+let server = HttpServer.listen(port: 8090, delegate: router)
 
 Server.run()
