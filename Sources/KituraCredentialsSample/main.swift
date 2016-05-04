@@ -86,7 +86,6 @@ router.get("/private/data", handler:
 })
 
 router.get("/login") { request, response, next in
-    print("/login")
     response.setHeader("Content-Type", value: "text/html; charset=utf-8")
     do {
         try response.status(HttpStatusCode.OK).send(
@@ -108,6 +107,18 @@ router.get("/login/facebook/callback",
 router.get("/login/google/callback",
            handler: credentials.authenticate(credentialsType: googleCredentials.name, failureRedirect: "/login"))
 
+
+router.get("/logout") { request, response, next in
+    credentials.logOut(request: request)
+    do {
+        try response.redirect("/login")
+    }
+    catch {
+        Log.error("Failed to redirect \(error)")
+    }
+
+    next()
+}
 
 
 // Handles any errors that get set
