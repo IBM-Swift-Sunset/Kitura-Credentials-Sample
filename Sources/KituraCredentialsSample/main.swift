@@ -66,13 +66,14 @@ credentials.options["successRedirect"] = "/private/data"
 router.all("/private", middleware: credentials)
 router.get("/private/data", handler:
     { request, response, next in
-        print("/private/data")
         response.setHeader("Content-Type", value: "text/html; charset=utf-8")
         do {
             if let userProfile = request.userProfile  {
                 try response.status(HttpStatusCode.OK).send(
                     "<!DOCTYPE html><html><body>" +
-                        "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!</body></html>\n\n").end()
+                        "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
+                        "<a href=/logout>Log Out</a>" +
+                        "</body></html>\n\n").end()
                 next()
                 return
             }
