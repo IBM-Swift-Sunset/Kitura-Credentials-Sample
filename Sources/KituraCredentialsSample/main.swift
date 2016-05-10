@@ -69,7 +69,7 @@ router.get("/private/data", handler:
         response.setHeader("Content-Type", value: "text/html; charset=utf-8")
         do {
             if let userProfile = request.userProfile  {
-                try response.status(HttpStatusCode.OK).send(
+                try response.status(.OK).send(
                     "<!DOCTYPE html><html><body>" +
                         "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
                         "<a href=/logout>Log Out</a>" +
@@ -77,7 +77,7 @@ router.get("/private/data", handler:
                 next()
                 return
             }
-            try response.status(HttpStatusCode.OK).send(
+            try response.status(.OK).send(
                 "<!DOCTYPE html><html><body>" +
                     "Welcome! Please <a href=/login>login</a>" +
                 "</body></html>\n\n").end()
@@ -89,7 +89,7 @@ router.get("/private/data", handler:
 router.get("/login") { request, response, next in
     response.setHeader("Content-Type", value: "text/html; charset=utf-8")
     do {
-        try response.status(HttpStatusCode.OK).send(
+        try response.status(.OK).send(
             "<!DOCTYPE html><html><body>" +
                 "<a href=/login/facebook>Log In with Facebook</a><br>" +
                 "<a href=/login/google>Log In with Google</a>" +
@@ -141,7 +141,7 @@ router.error { request, response, next in
 
 // A custom Not found handler
 router.all { request, response, next in
-    if  response.statusCode == .NOT_FOUND  {
+    if  response.statusCode == .notFound  {
         // Remove this wrapping if statement, if you want to handle requests to / as well
         if  request.originalUrl != "/"  &&  request.originalUrl != ""  {
             do {
@@ -156,6 +156,6 @@ router.all { request, response, next in
 }
 
 // Listen on port 8090
-let server = HttpServer.listen(port: 8090, delegate: router)
+let server = HTTPServer.listen(port: 8090, delegate: router)
 
 Server.run()
