@@ -25,11 +25,11 @@ let package = Package(
         )
     ],
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 13),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", majorVersion: 0, minor: 13),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 0, minor: 13),
-        .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 0, minor: 7),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-Session.git", majorVersion: 0, minor: 5)
+        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 14),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", majorVersion: 0, minor: 14),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 0, minor: 14),
+        .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 0, minor: 8),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-Session.git", majorVersion: 0, minor: 6)
     ],
     exclude: ["Makefile", "Kitura-Build"])
 
