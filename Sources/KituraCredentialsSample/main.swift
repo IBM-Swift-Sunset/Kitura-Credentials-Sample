@@ -66,7 +66,7 @@ credentials.options["successRedirect"] = "/private/data"
 router.all("/private", middleware: credentials)
 router.get("/private/data", handler:
     { request, response, next in
-        response.setHeader("Content-Type", value: "text/html; charset=utf-8")
+        response.headers["Content-Type"] = "text/html; charset=utf-8"
         do {
             if let userProfile = request.userProfile  {
                 try response.status(.OK).send(
@@ -87,7 +87,7 @@ router.get("/private/data", handler:
 })
 
 router.get("/login") { request, response, next in
-    response.setHeader("Content-Type", value: "text/html; charset=utf-8")
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
     do {
         try response.status(.OK).send(
             "<!DOCTYPE html><html><body>" +
@@ -124,7 +124,7 @@ router.get("/logout") { request, response, next in
 
 // Handles any errors that get set
 router.error { request, response, next in
-    response.setHeader("Content-Type", value: "text/plain; charset=utf-8")
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
     do {
         let errorDescription: String
         if let error = response.error {
