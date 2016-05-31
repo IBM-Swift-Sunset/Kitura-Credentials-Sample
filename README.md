@@ -9,7 +9,11 @@ A sample web application for authentication using Kitura-Credentials
 
 This is a sample [Kitura](https://github.com/IBM-Swift/Kitura) application for authentication using [Kitura-Credentials](https://github.com/IBM-Swift/Kitura-Credentials). See instructions for [Installation on OS X ](https://github.com/IBM-Swift/Kitura#installation-os-x) or [Installation on Linux](https://github.com/IBM-Swift/Kitura#installation-linux-apt-based).
 
-## Running Kitura-Credentials-Sample
+This sample shows both redirecting authentication with sessions using Facebook and Google login, and non-redirecting HTTP Basic and Digest authentication.
+
+## Running Kitura-Credentials-Sample with Facebook and Google login
+
+This section is only relevant to Facebook and Google login. If you are only interested in HTTP authentication, you can skip this section.
 
 ### Create an application instance on Facebook and Google
 
@@ -54,7 +58,11 @@ let googleCallbackUrl = // Put your callback URL here
 1. `make run`
 
   You should see message _Listening on port 8090_. The result executable is located in `.build/debug` directory: `./.build/debug/KituraCredentialsSample`
-2. Open your browser at [http://localhost:8090/private/data](http://localhost:8090/private/data)
+2. For Facebook/Google login, open your browser at [http://localhost:8090/private/pages/data](http://localhost:8090/private/pages/data).
+
+3. For HTTP authentication, open [http://localhost:8090/private/api/data](http://localhost:8090/private/api/data). For this path, Digest authentication will be performed.
+
+4. For HTTP Basic authentication, open your browser at [http://localhost:8090/private/basic/api/data](http://localhost:8090/private/basic/api/data).
 
 ## License
 

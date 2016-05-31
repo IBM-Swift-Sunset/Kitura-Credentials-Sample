@@ -23,6 +23,9 @@ import KituraSession
 import Credentials
 import CredentialsFacebook
 import CredentialsGoogle
+import CredentialsFacebookToken
+import CredentialsGoogleToken
+import CredentialsHttp
 import LoggerAPI
 import HeliumLogger
 
@@ -44,9 +47,9 @@ Log.logger = HeliumLogger()
 router.all(middleware: Session(secret: "Very very secret....."))
 
 
-// Authentication
+// Authentication with session
 
-let credentials = Credentials()
+let pagesCredentials = Credentials()
 
 let fbClientId = "Facebook client ID"
 let fbCallbackUrl = "serverUrl" + "/login/facebook/callback"
@@ -57,14 +60,14 @@ let googleClientSecret = "Google client secret"
 
 let fbCredentials = CredentialsFacebook(clientId: fbClientId, clientSecret: fbClientSecret, callbackUrl: fbCallbackUrl)
 let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl)
-credentials.register(plugin: fbCredentials)
-credentials.register(plugin: googleCredentials)
+pagesCredentials.register(plugin: fbCredentials)
+pagesCredentials.register(plugin: googleCredentials)
 
-credentials.options["failureRedirect"] = "/login"
-credentials.options["successRedirect"] = "/private/data"
+pagesCredentials.options["failureRedirect"] = "/login"
+pagesCredentials.options["successRedirect"] = "/private/pages/data"
 
-router.all("/private", middleware: credentials)
-router.get("/private/data", handler:
+router.all("/private/pages", middleware: pagesCredentials)
+router.get("/private/pages/data", handler:
     { request, response, next in
         response.headers["Content-Type"] = "text/html; charset=utf-8"
         do {
@@ -100,17 +103,17 @@ router.get("/login") { request, response, next in
 }
 
 router.get("/login/facebook",
-           handler: credentials.authenticate(credentialsType: fbCredentials.name))
+           handler: pagesCredentials.authenticate(credentialsType: fbCredentials.name))
 router.get("/login/google",
-           handler: credentials.authenticate(credentialsType: googleCredentials.name))
+           handler: pagesCredentials.authenticate(credentialsType: googleCredentials.name))
 router.get("/login/facebook/callback",
-           handler: credentials.authenticate(credentialsType: fbCredentials.name, failureRedirect: "/login"))
+           handler: pagesCredentials.authenticate(credentialsType: fbCredentials.name, failureRedirect: "/login"))
 router.get("/login/google/callback",
-           handler: credentials.authenticate(credentialsType: googleCredentials.name, failureRedirect: "/login"))
+           handler: pagesCredentials.authenticate(credentialsType: googleCredentials.name, failureRedirect: "/login"))
 
 
 router.get("/logout") { request, response, next in
-    credentials.logOut(request: request)
+    pagesCredentials.logOut(request: request)
     do {
         try response.redirect("/login")
     }
@@ -120,6 +123,90 @@ router.get("/logout") { request, response, next in
 
     next()
 }
+
+
+// Non-redirecting authentication
+
+let apiCredentials = Credentials()
+
+// Token plugins will pass
+let fbTokenCredentials = CredentialsFacebookToken()
+let googleTokenCredentials = CredentialsGoogleToken()
+let credentials = Credentials()
+apiCredentials.register(plugin: fbTokenCredentials)
+apiCredentials.register(plugin: googleTokenCredentials)
+
+// HTTP plugins, digest is registered first, it should be the one that sets the response headers of rejected requests
+let users = ["John" : "12345", "Mary" : "qwerasdf"]
+let digestCredentials = CredentialsHttpDigest(userProfileLoader: { userId, callback in
+    if let storedPassword = users[userId] {
+        callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HttpDigest"), password: storedPassword)
+    }
+    else {
+        callback(userProfile: nil, password: nil)
+    }
+    }, realm: "Kitura-users", opaque: "0a0b0c0d")
+
+apiCredentials.register(plugin: digestCredentials)
+
+let basicCredentials = CredentialsHttpBasic(userProfileLoader: { userId, callback in
+    if let storedPassword = users[userId] {
+        callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HttpBasic"), password: storedPassword)
+    }
+    else {
+        callback(userProfile: nil, password: nil)
+    }
+})
+apiCredentials.register(plugin: basicCredentials)
+
+router.all("/private/api", middleware: apiCredentials)
+router.get("/private/api/data", handler:
+    { request, response, next in
+        response.headers["Content-Type"] = "text/html; charset=utf-8"
+        do {
+            if let userProfile = request.userProfile  {
+                try response.status(.OK).send(
+                    "<!DOCTYPE html><html><body>" +
+                        "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
+                     "</body></html>\n\n").end()
+                next()
+                return
+            }
+            try response.status(.OK).send(
+                "<!DOCTYPE html><html><body>" +
+                    "You are not authorized to view this page" +
+                "</body></html>\n\n").end()
+        }
+        catch {}
+        next()
+})
+
+
+// Only HTTP basic is registered, the authentication should be basic here
+let apiBasicCredentials = Credentials()
+apiBasicCredentials.register(plugin: basicCredentials)
+
+router.all("/private/basic/api", middleware: apiBasicCredentials)
+router.get("/private/basic/api/data", handler:
+    { request, response, next in
+        response.headers["Content-Type"] = "text/html; charset=utf-8"
+        do {
+            if let userProfile = request.userProfile  {
+                try response.status(.OK).send(
+                    "<!DOCTYPE html><html><body>" +
+                        "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
+                    "</body></html>\n\n").end()
+                next()
+                return
+            }
+            try response.status(.OK).send(
+                "<!DOCTYPE html><html><body>" +
+                    "You are not authorized to view this page" +
+                "</body></html>\n\n").end()
+        }
+        catch {}
+        next()
+})
 
 
 // Handles any errors that get set
