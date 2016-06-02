@@ -25,14 +25,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 15),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", majorVersion: 0, minor: 15),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 0, minor: 15),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebookToken.git", majorVersion: 0, minor: 15),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogleToken.git", majorVersion: 0, minor: 15),
-        .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 0, minor: 7),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-Session.git", majorVersion: 0, minor: 7),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHttp.git", majorVersion: 0, minor: 15),
+        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 16),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", majorVersion: 0, minor: 16),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 0, minor: 16),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebookToken.git", majorVersion: 0, minor: 16),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogleToken.git", majorVersion: 0, minor: 16),
+        .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 0, minor: 8),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-Session.git", majorVersion: 0, minor: 8),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHttp.git", majorVersion: 0, minor: 16),
     ],
     exclude: ["Makefile", "Kitura-Build"])
 
