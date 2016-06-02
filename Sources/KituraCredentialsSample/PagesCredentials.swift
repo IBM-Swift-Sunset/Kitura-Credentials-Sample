@@ -22,6 +22,8 @@ import CredentialsGoogle
 import LoggerAPI
 import HeliumLogger
 
+import Foundation
+
 
 // Authentication with session
 
