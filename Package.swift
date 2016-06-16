@@ -30,7 +30,7 @@ let package = Package(
         .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 0, minor: 17),
         .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 0, minor: 9),
         .Package(url: "https://github.com/IBM-Swift/Kitura-Session.git", majorVersion: 0, minor: 9),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHttp.git", majorVersion: 0, minor: 17),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", majorVersion: 0, minor: 17),
     ],
     exclude: ["Makefile", "Kitura-Build"])
 

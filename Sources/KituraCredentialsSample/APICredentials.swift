@@ -19,7 +19,7 @@ import Kitura
 import Credentials
 import CredentialsGoogle
 import CredentialsFacebook
-import CredentialsHttp
+import CredentialsHTTP
 
 
 // Non-redirecting authentication
@@ -35,9 +35,9 @@ func setupAPI() {
     
     // HTTP plugins, digest is registered first, it should be the one that sets the response headers of rejected requests
     let users = ["John" : "12345", "Mary" : "qwerasdf"]
-    let digestCredentials = CredentialsHttpDigest(userProfileLoader: { userId, callback in
+    let digestCredentials = CredentialsHTTPDigest(userProfileLoader: { userId, callback in
         if let storedPassword = users[userId] {
-            callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HttpDigest"), password: storedPassword)
+            callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HTTPDigest"), password: storedPassword)
         }
         else {
             callback(userProfile: nil, password: nil)
@@ -46,9 +46,9 @@ func setupAPI() {
     
     apiCredentials.register(plugin: digestCredentials)
     
-    let basicCredentials = CredentialsHttpBasic(userProfileLoader: { userId, callback in
+    let basicCredentials = CredentialsHTTPBasic(userProfileLoader: { userId, callback in
         if let storedPassword = users[userId] {
-            callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HttpBasic"), password: storedPassword)
+            callback(userProfile: UserProfile(id: userId, displayName: userId, provider: "HTTPBasic"), password: storedPassword)
         }
         else {
             callback(userProfile: nil, password: nil)
