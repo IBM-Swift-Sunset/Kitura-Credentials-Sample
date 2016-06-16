@@ -17,8 +17,8 @@
 
 import Kitura
 import Credentials
-import CredentialsFacebookToken
-import CredentialsGoogleToken
+import CredentialsGoogle
+import CredentialsFacebook
 import CredentialsHttp
 
 
