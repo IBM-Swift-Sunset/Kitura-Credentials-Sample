@@ -15,6 +15,7 @@
  **/
 
 
+import Foundation
 import Kitura
 import Credentials
 import CredentialsFacebook
