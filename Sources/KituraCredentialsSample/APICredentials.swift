@@ -21,13 +21,15 @@ import CredentialsGoogle
 import CredentialsFacebook
 import CredentialsHTTP
 
+import SwiftyJSON
+
+import Foundation
 
 // Non-redirecting authentication
 
 func setupAPI() {
     let apiCredentials = Credentials()
     
-    // Token plugins will pass
     let fbTokenCredentials = CredentialsFacebookToken()
     let googleTokenCredentials = CredentialsGoogleToken()
     apiCredentials.register(plugin: fbTokenCredentials)
@@ -61,24 +63,37 @@ func setupAPI() {
         { request, response, next in
             response.headers["Content-Type"] = "text/html; charset=utf-8"
             do {
-                if let userProfile = request.userProfile  {
-                    try response.status(.OK).send(
-                        "<!DOCTYPE html><html><body>" +
-                            "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
-                        "</body></html>\n\n").end()
-                    next()
-                    return
-                }
-                try response.status(.OK).send(
-                    "<!DOCTYPE html><html><body>" +
-                        "You are not authorized to view this page" +
-                    "</body></html>\n\n").end()
+                try response.format(callbacks: [
+                    "text/plain" : { request, response in
+                        do {
+                            if let userProfile = request.userProfile  {
+                                try response.status(.OK).send("Hello " +  userProfile.displayName + "!\nYou are logged in with " + userProfile.provider + ".").end()
+                            }
+                            else {
+                                try response.status(.unauthorized).send("You are not authorized to view this data").end()
+                            }
+                        }
+                        catch {}
+                        next()
+                    },
+                    "text/html" : { request, response in
+                        do {
+                            if let userProfile = request.userProfile  {
+                                try response.status(.OK).send(
+                                    "<!DOCTYPE html><html><body>Hello " + userProfile.displayName + "!\nYou are logged in with " + userProfile.provider + ". This is private!<br>" + "</body></html>\n\n").end()
+                            }
+                            else {
+                                try response.status(.unauthorized).send(
+                                    "<!DOCTYPE html><html><body>You are not authorized to view this page</body></html>\n\n").end()
+                            }
+                        }
+                        catch {}
+                    }])
             }
             catch {}
-            next()
     })
     
-    
+
     // Only HTTP basic is registered, the authentication should be basic here
     let apiBasicCredentials = Credentials()
     apiBasicCredentials.register(plugin: basicCredentials)
@@ -96,7 +111,7 @@ func setupAPI() {
                     next()
                     return
                 }
-                try response.status(.OK).send(
+                try response.status(.unauthorized).send(
                     "<!DOCTYPE html><html><body>" +
                         "You are not authorized to view this page" +
                     "</body></html>\n\n").end()
