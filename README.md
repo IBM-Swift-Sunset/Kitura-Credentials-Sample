@@ -17,7 +17,7 @@ KituraCredentialsDemo application is a sample iOS application that shows the cli
 
 * [Running Kitura-Credentials-Sample with Facebook and Google web login](#running-kitura-credentials-sample-with-facebook-and-google-web-login)
 * [Build and run Kitura-Credentials-Sample](#build-and-run-kitura-credentials-sample)
-* [Running KituraCredentialsDemo](#running-kituraCredentialsDemo)
+* [Running KituraCredentialsDemo](#running-kituracredentialsdemo)
 * [License](#license)
 
 ## Running Kitura-Credentials-Sample with Facebook and Google web login
@@ -79,7 +79,7 @@ let googleCallbackUrl = // Put your callback URL here
 
 KituraCredentialsDemo application is a sample iOS application that shows the client side of authentication with OAuth tokens. After signing in using either Facebook or Google the user can request private data from Kitura-Credentials-Sample server. The app sends a request to /private/api/data with either Facebook or Google OAuth token.
 
-### 1. Create an application instance on Facebook or Google
+### 1. Create an application instance on Facebook and Google
 In order to enable Facebook and Google sign in the app, you have to create application instances.
 
 ##### Facebook
@@ -110,7 +110,7 @@ Now configure LSApplicationQueriesSchemes in Info.plist: add an item with `fbaut
 
 After completing the above steps your `Info.plist` file should look like this:
 <p align="center">
-<img src="img/infoplist.PNG"  alt="Drawing" height=150 border=0 /></p>
+<img src="img/infoplist.png"  alt="Drawing" height=150 border=0 /></p>
 <p align="center">Figure 1. Info.plist file.</p>
 
 
