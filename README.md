@@ -110,18 +110,13 @@ Now configure LSApplicationQueriesSchemes in Info.plist: add an item with `fbaut
 
 After completing the above steps your `Info.plist` file should look like this:
 <p align="center">
-<img src="img/infoplist.png"  alt="Drawing" height=150 border=0 /></p>
+<img src="img/infoplist.png"  alt="Drawing" height=250 border=0 /></p>
 <p align="center">Figure 1. Info.plist file.</p>
 
 
 ### 2. Install needed CocoaPods
 
-1. If needed install CocoaPods by running:
-```bash
-sudo gem install cocoapods
-```
-
-2. Go to the KituraCredentialsDemo directory and run:
+Go to the KituraCredentialsDemo directory and run:
 ```bash
 pod install
 ```
