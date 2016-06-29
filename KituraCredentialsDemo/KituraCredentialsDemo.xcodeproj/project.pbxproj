@@ -20,7 +20,6 @@
 		A2F0676E1D1932F4004C91BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2F0676C1D1932F4004C91BA /* LaunchScreen.storyboard */; };
 		A2F0677D1D193403004C91BA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0677A1D193403004C91BA /* UserManager.swift */; };
 		A2F0677E1D193403004C91BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2F0677C1D193403004C91BA /* GoogleService-Info.plist */; };
-		A2F067801D19340D004C91BA /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0677F1D19340D004C91BA /* CredentialsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +52,6 @@
 		A2F0677A1D193403004C91BA /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A2F0677B1D193403004C91BA /* KituraCredentialsDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KituraCredentialsDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2F0677C1D193403004C91BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A2F0677F1D19340D004C91BA /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
 		C20182D7582ACA2C7A8CD6B0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,7 +123,6 @@
 			children = (
 				A2F067631D1932F4004C91BA /* AppDelegate.swift */,
 				A2F0677A1D193403004C91BA /* UserManager.swift */,
-				A2F0677F1D19340D004C91BA /* CredentialsViewController.swift */,
 				A2F067651D1932F4004C91BA /* ViewController.swift */,
 				A2F0677B1D193403004C91BA /* KituraCredentialsDemo-Bridging-Header.h */,
 				A2F067671D1932F4004C91BA /* Main.storyboard */,
@@ -311,7 +308,6 @@
 				A2F0677D1D193403004C91BA /* UserManager.swift in Sources */,
 				A2F067661D1932F4004C91BA /* ViewController.swift in Sources */,
 				A2F067641D1932F4004C91BA /* AppDelegate.swift in Sources */,
-				A2F067801D19340D004C91BA /* CredentialsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +500,7 @@
 				A2CFECBE1D1A6CFF00C1D8F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A2F0675B1D1932F4004C91BA /* Build configuration list for PBXProject "KituraCredentialsDemo" */ = {
 			isa = XCConfigurationList;

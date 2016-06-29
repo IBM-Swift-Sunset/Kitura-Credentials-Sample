@@ -18,13 +18,12 @@
 import UIKit
 import Alamofire
 
-/// Manages all user authentication state and calls
 class UserManager: NSObject {
     
     enum UserAuthenticationState : String {
-        case SignedInWithFacebook
-        case SignedInWithGoogle
-        case SignedOut
+        case signedInWithFacebook
+        case signedInWithGoogle
+        case signedOut
     }
     
     /// Shared instance of user manager
@@ -42,7 +41,7 @@ class UserManager: NSObject {
     var uniqueUserID: String?
     
     /// User's authentication state
-    var userAuthenticationState = UserAuthenticationState.SignedOut
+    var userAuthenticationState = UserAuthenticationState.signedOut
     
     /// User object received from Google after signing in
     var googleUser: GIDGoogleUser?
@@ -53,7 +52,7 @@ class UserManager: NSObject {
             let userName = NSUserDefaults.standardUserDefaults().objectForKey("user_name") as? String,
             let signedInWith = NSUserDefaults.standardUserDefaults().objectForKey("signedInWith") as? String {
             userAuthenticationState = UserAuthenticationState(rawValue: signedInWith)!
-            if  userAuthenticationState == .SignedInWithFacebook {
+            if  userAuthenticationState == .signedInWithFacebook {
                 userDisplayName = userName
                 uniqueUserID = userID
             }
@@ -65,17 +64,17 @@ class UserManager: NSObject {
         uniqueUserID = nil
         googleUser = nil
         switch userAuthenticationState {
-        case .SignedInWithFacebook:
+        case .signedInWithFacebook:
             FBSDKLoginManager().logOut()
-        case .SignedInWithGoogle:
+        case .signedInWithGoogle:
             GIDSignIn.sharedInstance().signOut()
         default: break
         }
         
-        userAuthenticationState = .SignedOut
+        userAuthenticationState = .signedOut
         NSUserDefaults.standardUserDefaults().removeObjectForKey("user_id")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
-        NSUserDefaults.standardUserDefaults().setObject(String(UserAuthenticationState.SignedOut), forKey: "signedInWith")
+        NSUserDefaults.standardUserDefaults().setObject(String(UserAuthenticationState.signedOut), forKey: "signedInWith")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
@@ -90,12 +89,12 @@ class UserManager: NSObject {
         mutableURLRequest.HTTPMethod = "GET"
         
         switch UserManager.SharedInstance.userAuthenticationState {
-        case .SignedInWithFacebook:
+        case .signedInWithFacebook:
             mutableURLRequest.addValue(FBSDKAccessToken.currentAccessToken().tokenString, forHTTPHeaderField: "access_token")
             mutableURLRequest.addValue("FacebookToken", forHTTPHeaderField: "X-token-type")
             mutableURLRequest.addValue("text/plain", forHTTPHeaderField: "Accept")
             self.sendRequest(mutableURLRequest, onSuccess: onSuccess, onFailure: onFailure)
-        case .SignedInWithGoogle:
+        case .signedInWithGoogle:
             UserManager.SharedInstance.googleUser?.authentication.getTokensWithHandler({ (auth, error) in
                 guard error == nil else {
                     onFailure(error: "Failed to get Google access token: \(error.localizedDescription)")
@@ -105,7 +104,7 @@ class UserManager: NSObject {
                 mutableURLRequest.addValue("GoogleToken", forHTTPHeaderField: "X-token-type")
                 self.sendRequest(mutableURLRequest, onSuccess: onSuccess, onFailure: onFailure)
             })
-        case .SignedOut:
+        case .signedOut:
             onFailure(error: "User not signed in")
         }
     }

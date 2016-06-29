@@ -1,66 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Credentials View Controller-->
-        <scene sceneID="v4U-XS-zwr">
-            <objects>
-                <viewController id="laG-dj-yV3" customClass="CredentialsViewController" customModule="KituraCredentialsDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WyE-gg-2bQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="67X-DV-bO7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="C15-u5-F1G">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIe-SC-zWQ">
-                                <rect key="frame" x="245" y="176" width="110" height="30"/>
-                                <state key="normal" title="Get private data"/>
-                                <connections>
-                                    <action selector="credentialsButtonPressed:" destination="laG-dj-yV3" eventType="touchUpInside" id="qYl-Ov-aT2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guw-Jy-pkR">
-                                <rect key="frame" x="272" y="416" width="57" height="30"/>
-                                <state key="normal" title="Sign out"/>
-                                <connections>
-                                    <action selector="signOutPressed:" destination="laG-dj-yV3" eventType="touchUpInside" id="0Mw-5r-eKB"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AW3-z8-dsa">
-                                <rect key="frame" x="20" y="256" width="560" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="AW3-z8-dsa" firstAttribute="centerX" secondItem="guw-Jy-pkR" secondAttribute="centerX" id="9Nb-s5-rI7"/>
-                            <constraint firstItem="AW3-z8-dsa" firstAttribute="top" secondItem="nIe-SC-zWQ" secondAttribute="bottom" constant="50" id="B5n-g4-foG"/>
-                            <constraint firstItem="guw-Jy-pkR" firstAttribute="top" secondItem="nIe-SC-zWQ" secondAttribute="bottom" constant="210" id="Clf-MV-S2z"/>
-                            <constraint firstItem="guw-Jy-pkR" firstAttribute="centerY" secondItem="C15-u5-F1G" secondAttribute="centerY" constant="131" id="IWr-92-38l"/>
-                            <constraint firstItem="nIe-SC-zWQ" firstAttribute="centerX" secondItem="C15-u5-F1G" secondAttribute="centerX" id="RMo-RW-RP8"/>
-                            <constraint firstItem="guw-Jy-pkR" firstAttribute="top" secondItem="AW3-z8-dsa" secondAttribute="bottom" constant="32" id="Rs0-gJ-I1u"/>
-                            <constraint firstItem="AW3-z8-dsa" firstAttribute="leading" secondItem="C15-u5-F1G" secondAttribute="leadingMargin" id="Teo-ro-VOH"/>
-                            <constraint firstItem="nIe-SC-zWQ" firstAttribute="centerX" secondItem="guw-Jy-pkR" secondAttribute="centerX" id="uOk-5I-4dY"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="credentialsButton" destination="nIe-SC-zWQ" id="Ryo-Xp-HSY"/>
-                        <outlet property="dataView" destination="AW3-z8-dsa" id="4Ms-Ch-hgY"/>
-                        <outlet property="signOutButton" destination="guw-Jy-pkR" id="I41-HE-lQd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N9Q-r4-gGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="587" y="-202"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -76,8 +20,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-z9-xk9">
                                 <rect key="frame" x="112" y="-33" width="375" height="667"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guw-Jy-pkR">
+                                        <rect key="frame" x="159" y="593" width="57" height="30"/>
+                                        <state key="normal" title="Sign out"/>
+                                        <connections>
+                                            <action selector="signOutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z20-GI-Itp"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXB-lf-pWS" userLabel="container">
-                                        <rect key="frame" x="48" y="202" width="280" height="264"/>
+                                        <rect key="frame" x="47" y="150" width="280" height="264"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kitura Credentials Demo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-wj-t7q">
                                                 <rect key="frame" x="8" y="18" width="264" height="29"/>
@@ -147,11 +98,33 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIe-SC-zWQ">
+                                        <rect key="frame" x="132" y="403" width="110" height="30"/>
+                                        <state key="normal" title="Get private data"/>
+                                        <connections>
+                                            <action selector="credentialsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oiy-YG-ccf"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AW3-z8-dsa">
+                                        <rect key="frame" x="-89" y="483" width="553" height="74"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="K7L-fY-rGb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="KXB-lf-pWS" secondAttribute="centerY" id="3ZZ-K8-eQr"/>
+                                    <constraint firstAttribute="centerY" secondItem="KXB-lf-pWS" secondAttribute="centerY" constant="51.5" id="3ZZ-K8-eQr"/>
+                                    <constraint firstItem="AW3-z8-dsa" firstAttribute="leading" secondItem="SOU-z9-xk9" secondAttribute="leading" constant="-89" id="AgU-lj-ZBj"/>
                                     <constraint firstAttribute="centerX" secondItem="KXB-lf-pWS" secondAttribute="centerX" id="I7k-ll-zZa"/>
+                                    <constraint firstItem="AW3-z8-dsa" firstAttribute="top" secondItem="SOU-z9-xk9" secondAttribute="top" constant="483" id="IQs-z3-hlX"/>
+                                    <constraint firstItem="guw-Jy-pkR" firstAttribute="top" secondItem="AW3-z8-dsa" secondAttribute="bottom" constant="36" id="JaN-7X-cpm"/>
+                                    <constraint firstItem="AW3-z8-dsa" firstAttribute="centerX" secondItem="guw-Jy-pkR" secondAttribute="centerX" id="TM4-cq-CCl"/>
+                                    <constraint firstItem="AW3-z8-dsa" firstAttribute="centerX" secondItem="KXB-lf-pWS" secondAttribute="centerX" constant="0.5" id="iJr-Xe-8lh"/>
+                                    <constraint firstItem="nIe-SC-zWQ" firstAttribute="centerX" secondItem="AW3-z8-dsa" secondAttribute="centerX" constant="-0.5" id="nnK-ll-GxE"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -161,19 +134,23 @@
                             <constraint firstItem="SOU-z9-xk9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DeL-5l-hJM"/>
                             <constraint firstItem="SOU-z9-xk9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-33" id="I0O-h3-vOY"/>
                             <constraint firstItem="SOU-z9-xk9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="92" id="XOr-KH-nFa"/>
+                            <constraint firstItem="nIe-SC-zWQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="85" id="zXf-Om-dVH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="connectingLabel" destination="0Kr-4t-OFY" id="Itt-sf-7gp"/>
+                        <outlet property="credentialsButton" destination="nIe-SC-zWQ" id="bdi-80-gYG"/>
+                        <outlet property="dataView" destination="AW3-z8-dsa" id="5Vs-se-9i8"/>
                         <outlet property="fbLoginButton" destination="vvG-Iw-h6H" id="OFU-OF-MkE"/>
                         <outlet property="googleLoginButton" destination="LC7-CK-oxC" id="w2K-f5-6gS"/>
                         <outlet property="loadingIndicator" destination="TXT-4c-X49" id="p25-tg-u3h"/>
-                        <segue destination="laG-dj-yV3" kind="presentation" identifier="Segue" id="xAQ-je-HZN"/>
+                        <outlet property="loginContainer" destination="KXB-lf-pWS" id="Etz-Vm-dwv"/>
+                        <outlet property="signOutButton" destination="guw-Jy-pkR" id="kHs-wt-fr9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100" y="-202"/>
+            <point key="canvasLocation" x="-90" y="-210"/>
         </scene>
     </scenes>
 </document>

@@ -22,51 +22,101 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
     @IBOutlet weak var connectingLabel: UILabel!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
     
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
-    /**
-     Method called upon view did load. In this case we set up the view model.
-     */
+    
+    @IBOutlet weak var credentialsButton: UIButton!
+    
+    @IBOutlet weak var signOutButton: UIButton!
+    
+    @IBOutlet weak var dataView: UITextView!
+    
+    @IBOutlet weak var loginContainer: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Facebook Sign-In
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = ["public_profile", "email"]
         fbLoginButton.loginBehavior = FBSDKLoginBehavior.SystemAccount
         
-        // Google
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         googleLoginButton.colorScheme = GIDSignInButtonColorScheme.Dark
         
+        dataView.text = ""
+        signOutButton.hidden = true
+        credentialsButton.hidden = true
         
         UserManager.SharedInstance.updateFromUserDefaults()
-
-        if UserManager.SharedInstance.userAuthenticationState == .SignedInWithGoogle && UserManager.SharedInstance.googleUser == nil {
-            startLoading("Connecting to Google")
-            GIDSignIn.sharedInstance().signInSilently()
+        switch UserManager.SharedInstance.userAuthenticationState {
+        case .signedInWithGoogle:
+            if UserManager.SharedInstance.googleUser == nil {
+                GIDSignIn.sharedInstance().signInSilently()
+            }
+        case .signedInWithFacebook:
+            if FBSDKAccessToken.currentAccessToken()?.tokenString != nil {
+                stopLoading()
+            }
+        case .signedOut: break
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if FBSDKAccessToken.currentAccessToken()?.tokenString != nil {
-            UserManager.SharedInstance.userAuthenticationState = .SignedInWithFacebook
-            performSegueWithIdentifier("Segue", sender: self)
-        }
-    }
-    
-    /**
-     Method to authenticate with facebook when login is tapped
-     
-     - parameter sender: button tapped
-     */
     @IBAction func loginTapped(sender: AnyObject) {
         startLoading("Connecting")
     }
+    
+    @IBAction func signOutButtonPressed(sender: UIButton) {
+        UserManager.SharedInstance.signOut()
+        loginContainer.hidden = false
+        fbLoginButton.hidden = false
+        fbLoginButton.setNeedsLayout()
+        googleLoginButton.hidden = false
+        signOutButton.hidden = true
+        credentialsButton.hidden = true
+        dataView.text = ""
+    }
+    
+    @IBAction func credentialsButtonPressed(sender: UIButton) {
+        UserManager.SharedInstance.getPrivateData(
+            onSuccess: { data in
+                self.dataView.text = data
+            },
+            onFailure: { error in
+                self.dataView.text = "Failed to get private data"
+                print("Failed to get private data: ", error)
+        })
+    }
+    
+    /**
+     Method to start the loading animation and setup UI for loading
+     */
+    func startLoading(connectingMessage: String) {
+        fbLoginButton.hidden = true
+        googleLoginButton.hidden = true
+        loadingIndicator.startAnimating()
+        loadingIndicator.hidden = false
+        connectingLabel.text = connectingMessage
+        connectingLabel.hidden = false
+    }
+    
+    /**
+     Method to stop the loading animation and setup UI for signed in state
+     */
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+        loadingIndicator.hidden = true
+        connectingLabel.hidden = true
+        fbLoginButton.hidden = true
+        googleLoginButton.hidden = true
+        loginContainer.hidden = true
+        
+        signOutButton.hidden = false
+        credentialsButton.hidden = false
+    }
+    
     
     // Facebook
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
@@ -85,7 +135,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                     let fbId = result.valueForKey("id") as! String
                     let fbName = result.valueForKey("name") as! String
                     if(FBSDKAccessToken.currentAccessToken() != nil) {
-                        self.signedInAs(fbName, id: fbId, userState: .SignedInWithFacebook)
+                        self.signedInAs(fbName, id: fbId, userState: .signedInWithFacebook)
                     } else {
                         print("Unable to get Facebook access token")
                     }
@@ -107,58 +157,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
             let userId = user.userID
             let name = user.profile.name
             UserManager.SharedInstance.googleUser = user
-            self.signedInAs(name, id: userId, userState: .SignedInWithGoogle)
+            self.signedInAs(name, id: userId, userState: .signedInWithGoogle)
         }
     }
     
     func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!, withError error: NSError!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
     }
     
     
     func signedInAs(userName: String, id: String, userState: UserManager.UserAuthenticationState) {
         stopLoading()
-        print("in signed in")
+
         UserManager.SharedInstance.userDisplayName = userName
         UserManager.SharedInstance.uniqueUserID = id
         UserManager.SharedInstance.userAuthenticationState = userState
         NSUserDefaults.standardUserDefaults().setObject(id, forKey: "user_id")
         NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
         NSUserDefaults.standardUserDefaults().setObject(userState.rawValue,forKey: "signedInWith")
-        
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasPressedLater")
         NSUserDefaults.standardUserDefaults().synchronize()
-        
- //       dismissViewControllerAnimated(true, completion: nil)
-        performSegueWithIdentifier("Segue", sender: self)
-    }
-    
-    
-    /**
-     Method to start the loading animation and setup UI for loading
-     */
-    func startLoading(connectingMessage: String) {
-        fbLoginButton.hidden = true
-        googleLoginButton.hidden = true
-        loadingIndicator.startAnimating()
-        loadingIndicator.hidden = false
-        connectingLabel.text = connectingMessage
-        connectingLabel.hidden = false
-    }
-    
-    
-    /**
-     Method to stop the loading animation and setup UI for done loading state
-     */
-    func stopLoading() {
-        loadingIndicator.stopAnimating()
-        loadingIndicator.hidden = true
-        connectingLabel.hidden = true
-        fbLoginButton.hidden = false
-        fbLoginButton.setNeedsLayout()
-        googleLoginButton.hidden = false
-
     }
     
 }
