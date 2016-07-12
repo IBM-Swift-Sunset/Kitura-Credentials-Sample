@@ -58,7 +58,7 @@ router.error { request, response, next in
 router.all { request, response, next in
     if  response.statusCode == .notFound  {
         // Remove this wrapping if statement, if you want to handle requests to / as well
-        if  request.originalUrl != "/"  &&  request.originalUrl != ""  {
+        if  request.originalURL != "/"  &&  request.originalURL != ""  {
             do {
                 try response.send("Route not found in Sample application!").end()
             }
