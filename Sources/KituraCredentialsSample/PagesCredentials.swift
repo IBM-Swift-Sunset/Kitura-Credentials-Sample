@@ -37,7 +37,7 @@ func setupPages() {
     let googleClientSecret = "Google client secret"
     
     let fbCredentials = CredentialsFacebook(clientId: fbClientId, clientSecret: fbClientSecret, callbackUrl: fbCallbackUrl)
-    let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl)
+    let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl, options: ["scope":"email profile", "userProfileDelegate":GoogleUserProfileDelegate()])
     pagesCredentials.register(plugin: fbCredentials)
     pagesCredentials.register(plugin: googleCredentials)
     
@@ -50,9 +50,17 @@ func setupPages() {
             response.headers["Content-Type"] = "text/html; charset=utf-8"
             do {
                 if let userProfile = request.userProfile  {
+                    var emailString = ""
+                    var title = ""
+                    if let email = userProfile.emails?[0].value {
+                        emailString = " Your email is \(email). "
+                    }
+                    if let gender = userProfile.extendedProperties?["gender"] as? String {
+                        title = (gender == "female") ? "Ms " : "Mr "
+                    }
                     try response.status(.OK).send(
                         "<!DOCTYPE html><html><body>" +
-                            "Hello " +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". This is private!<br>" +
+                            "Hello \(title)" +  userProfile.displayName + "! You are logged in with " + userProfile.provider + ". \(emailString)This is private!<br>" +
                             "<a href=/logout>Log Out</a>" +
                         "</body></html>\n\n").end()
                     next()
@@ -63,7 +71,8 @@ func setupPages() {
                         "Welcome! Please <a href=/login>login</a>" +
                     "</body></html>\n\n").end()
             }
-            catch {}
+            catch {
+            }
             next()
     })
     
@@ -102,3 +111,4 @@ func setupPages() {
         next()
     }
 }
+
