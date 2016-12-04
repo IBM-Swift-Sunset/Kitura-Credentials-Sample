@@ -36,8 +36,8 @@ func setupPages() {
     let googleCallbackUrl = "serverUrl" + "/login/google/callback"
     let googleClientSecret = "Google client secret"
     
-    let fbCredentials = CredentialsFacebook(clientId: fbClientId, clientSecret: fbClientSecret, callbackUrl: fbCallbackUrl)
-    let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl, options: ["scope":"email profile", "userProfileDelegate":GoogleUserProfileDelegate()])
+    let fbCredentials = CredentialsFacebook(clientId: fbClientId, clientSecret: fbClientSecret, callbackUrl: fbCallbackUrl, options: ["scope":"email", "userProfileDelegate":CustomUserProfileDelegate(), "fields":"email,id,name,gender"])
+    let googleCredentials = CredentialsGoogle(clientId: googleClientId, clientSecret: googleClientSecret, callbackUrl: googleCallbackUrl, options: ["scope":"email profile", "userProfileDelegate":CustomUserProfileDelegate()])
     pagesCredentials.register(plugin: fbCredentials)
     pagesCredentials.register(plugin: googleCredentials)
     

@@ -16,7 +16,7 @@
 
 import Credentials
 
-public class GoogleUserProfileDelegate: UserProfileDelegate {
+public class CustomUserProfileDelegate: UserProfileDelegate {
     public func update(userProfile: UserProfile, from dictionary: [String:Any]) {
         if let gender = dictionary["gender"] as? String {
             if userProfile.extendedProperties == nil {
