@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DFB593C6413D146EF37C052 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20182D7582ACA2C7A8CD6B0 /* Pods.framework */; };
+		978B3E0DC97717B4BB6DF2E8 /* Pods_KituraCredentialsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130FCF3154F4B11A535E3448 /* Pods_KituraCredentialsDemo.framework */; };
 		A2CFECB81D1A6CFF00C1D8F6 /* KituraCredentialsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CFECB71D1A6CFF00C1D8F6 /* KituraCredentialsDemoUITests.swift */; };
 		A2CFECC01D1A6D2400C1D8F6 /* FacebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CFECBF1D1A6D2400C1D8F6 /* FacebookTests.swift */; };
 		A2CFECD01D1A755D00C1D8F6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2CFECCD1D1A755D00C1D8F6 /* Bolts.framework */; };
@@ -33,8 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		635DF97BE7063091A2F0AFAD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		63B5E5D8B47843C4D908F70B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		130FCF3154F4B11A535E3448 /* Pods_KituraCredentialsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KituraCredentialsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2565466049F78F7B556CE4DF /* Pods-KituraCredentialsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KituraCredentialsDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KituraCredentialsDemo/Pods-KituraCredentialsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		A27A74181DF443460033E2E4 /* KituraCredentialsDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KituraCredentialsDemo.entitlements; sourceTree = "<group>"; };
 		A2CFECB51D1A6CFF00C1D8F6 /* KituraCredentialsDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KituraCredentialsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2CFECB71D1A6CFF00C1D8F6 /* KituraCredentialsDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KituraCredentialsDemoUITests.swift; sourceTree = "<group>"; };
 		A2CFECB91D1A6CFF00C1D8F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		A2F0677B1D193403004C91BA /* KituraCredentialsDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KituraCredentialsDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2F0677C1D193403004C91BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C20182D7582ACA2C7A8CD6B0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAE81BFB2F34DB58362E0AD4 /* Pods-KituraCredentialsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KituraCredentialsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KituraCredentialsDemo/Pods-KituraCredentialsDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,10 +69,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DFB593C6413D146EF37C052 /* Pods.framework in Frameworks */,
 				A2CFECD11D1A755D00C1D8F6 /* FBSDKCoreKit.framework in Frameworks */,
 				A2CFECD21D1A755D00C1D8F6 /* FBSDKLoginKit.framework in Frameworks */,
 				A2CFECD01D1A755D00C1D8F6 /* Bolts.framework in Frameworks */,
+				978B3E0DC97717B4BB6DF2E8 /* Pods_KituraCredentialsDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 				A2CFECCE1D1A755D00C1D8F6 /* FBSDKCoreKit.framework */,
 				A2CFECCF1D1A755D00C1D8F6 /* FBSDKLoginKit.framework */,
 				C20182D7582ACA2C7A8CD6B0 /* Pods.framework */,
+				130FCF3154F4B11A535E3448 /* Pods_KituraCredentialsDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,7 +108,7 @@
 				A2CFECB61D1A6CFF00C1D8F6 /* KituraCredentialsDemoUITests */,
 				A2F067611D1932F4004C91BA /* Products */,
 				9F5F7929091827A0A3602473 /* Frameworks */,
-				EF8750C0EDEC9C975125D57C /* Pods */,
+				A38876F7AAABF84C9DCCB415 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +124,7 @@
 		A2F067621D1932F4004C91BA /* KituraCredentialsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				A27A74181DF443460033E2E4 /* KituraCredentialsDemo.entitlements */,
 				A2F067631D1932F4004C91BA /* AppDelegate.swift */,
 				A2F0677A1D193403004C91BA /* UserManager.swift */,
 				A2F067651D1932F4004C91BA /* ViewController.swift */,
@@ -134,11 +138,11 @@
 			path = KituraCredentialsDemo;
 			sourceTree = "<group>";
 		};
-		EF8750C0EDEC9C975125D57C /* Pods */ = {
+		A38876F7AAABF84C9DCCB415 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				635DF97BE7063091A2F0AFAD /* Pods.debug.xcconfig */,
-				63B5E5D8B47843C4D908F70B /* Pods.release.xcconfig */,
+				2565466049F78F7B556CE4DF /* Pods-KituraCredentialsDemo.debug.xcconfig */,
+				FAE81BFB2F34DB58362E0AD4 /* Pods-KituraCredentialsDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -168,12 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2F067721D1932F4004C91BA /* Build configuration list for PBXNativeTarget "KituraCredentialsDemo" */;
 			buildPhases = (
-				778C3E8FFAAAEAE6BDA9C4B5 /* Check Pods Manifest.lock */,
+				FDFA4412D70F01FF50B753D2 /* [CP] Check Pods Manifest.lock */,
 				A2F0675C1D1932F4004C91BA /* Sources */,
 				A2F0675D1D1932F4004C91BA /* Frameworks */,
 				A2F0675E1D1932F4004C91BA /* Resources */,
-				0BE203C29DA0E7ACF837D3A2 /* Embed Pods Frameworks */,
-				7A9B2C11E854061344C44995 /* Copy Pods Resources */,
+				A6988CD9B593C914438AB594 /* [CP] Embed Pods Frameworks */,
+				ECB01282DDA9F932C31824EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,15 +195,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					A2CFECB41D1A6CFF00C1D8F6 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 						TestTargetID = A2F0675F1D1932F4004C91BA;
 					};
 					A2F0675F1D1932F4004C91BA = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 76CMF53Q35;
+						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -244,49 +256,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0BE203C29DA0E7ACF837D3A2 /* Embed Pods Frameworks */ = {
+		A6988CD9B593C914438AB594 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KituraCredentialsDemo/Pods-KituraCredentialsDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		778C3E8FFAAAEAE6BDA9C4B5 /* Check Pods Manifest.lock */ = {
+		ECB01282DDA9F932C31824EA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KituraCredentialsDemo/Pods-KituraCredentialsDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A9B2C11E854061344C44995 /* Copy Pods Resources */ = {
+		FDFA4412D70F01FF50B753D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -352,6 +364,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.KituraCredentialsDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = KituraCredentialsDemo;
 			};
 			name = Debug;
@@ -367,6 +380,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.KituraCredentialsDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = KituraCredentialsDemo;
 			};
 			name = Release;
@@ -385,8 +399,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -430,8 +446,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -450,15 +468,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		A2F067731D1932F4004C91BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 635DF97BE7063091A2F0AFAD /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 2565466049F78F7B556CE4DF /* Pods-KituraCredentialsDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KituraCredentialsDemo/KituraCredentialsDemo.entitlements;
+				DEVELOPMENT_TEAM = 76CMF53Q35;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -469,14 +490,17 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.KituraCredentialsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KituraCredentialsDemo/KituraCredentialsDemo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		A2F067741D1932F4004C91BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63B5E5D8B47843C4D908F70B /* Pods.release.xcconfig */;
+			baseConfigurationReference = FAE81BFB2F34DB58362E0AD4 /* Pods-KituraCredentialsDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KituraCredentialsDemo/KituraCredentialsDemo.entitlements;
+				DEVELOPMENT_TEAM = 76CMF53Q35;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -487,6 +511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.KituraCredentialsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KituraCredentialsDemo/KituraCredentialsDemo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -19,10 +19,7 @@ import Credentials
 public class CustomUserProfileDelegate: UserProfileDelegate {
     public func update(userProfile: UserProfile, from dictionary: [String:Any]) {
         if let gender = dictionary["gender"] as? String {
-            if userProfile.extendedProperties == nil {
-                userProfile.extendedProperties = [String:Any]()
-            }
-            userProfile.extendedProperties!["gender"] = gender
+            userProfile.extendedProperties["gender"] = gender
         }
     }
 }

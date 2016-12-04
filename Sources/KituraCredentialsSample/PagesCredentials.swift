@@ -55,7 +55,7 @@ func setupPages() {
                     if let email = userProfile.emails?[0].value {
                         emailString = " Your email is \(email). "
                     }
-                    if let gender = userProfile.extendedProperties?["gender"] as? String {
+                    if let gender = userProfile.extendedProperties["gender"] as? String {
                         title = (gender == "female") ? "Ms " : "Mr "
                     }
                     try response.status(.OK).send(
