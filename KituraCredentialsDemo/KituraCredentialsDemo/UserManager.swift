@@ -32,7 +32,7 @@ class UserManager: NSObject {
         return manager
     }()
     
-    private override init() {} //This prevents others from using the default '()' initializer for this class.
+    fileprivate override init() {} //This prevents others from using the default '()' initializer for this class.
     
     /// Display name for user
     var userDisplayName: String?
@@ -48,9 +48,9 @@ class UserManager: NSObject {
     
     
     func updateFromUserDefaults() {
-        if let userID = NSUserDefaults.standardUserDefaults().objectForKey("user_id") as? String,
-            let userName = NSUserDefaults.standardUserDefaults().objectForKey("user_name") as? String,
-            let signedInWith = NSUserDefaults.standardUserDefaults().objectForKey("signedInWith") as? String {
+        if let userID = UserDefaults.standard.object(forKey: "user_id") as? String,
+            let userName = UserDefaults.standard.object(forKey: "user_name") as? String,
+            let signedInWith = UserDefaults.standard.object(forKey: "signedInWith") as? String {
             userAuthenticationState = UserAuthenticationState(rawValue: signedInWith)!
             if  userAuthenticationState == .signedInWithFacebook {
                 userDisplayName = userName
@@ -72,50 +72,50 @@ class UserManager: NSObject {
         }
         
         userAuthenticationState = .signedOut
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("user_id")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
-        NSUserDefaults.standardUserDefaults().setObject(String(UserAuthenticationState.signedOut), forKey: "signedInWith")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.removeObject(forKey: "user_id")
+        UserDefaults.standard.removeObject(forKey: "user_name")
+        UserDefaults.standard.set(String(describing: UserAuthenticationState.signedOut), forKey: "signedInWith")
+        UserDefaults.standard.synchronize()
     }
     
-    func getPrivateData(onSuccess onSuccess: (data: String) -> Void, onFailure: (error: String) -> Void) {
+    func getPrivateData(onSuccess: @escaping (_ data: String) -> Void, onFailure: @escaping (_ error: String) -> Void) {
         let url = "http://localhost:8090/private/api/data"
-        guard let nsURL = NSURL(string: url) else {
-            onFailure(error: "Bad URL")
+        guard let nsURL = URL(string: url) else {
+            onFailure("Bad URL")
             return
         }
         
-        let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
-        mutableURLRequest.HTTPMethod = "GET"
+        var mutableURLRequest = URLRequest(url: nsURL)
+        mutableURLRequest.httpMethod = "GET"
         
         switch UserManager.SharedInstance.userAuthenticationState {
         case .signedInWithFacebook:
-            mutableURLRequest.addValue(FBSDKAccessToken.currentAccessToken().tokenString, forHTTPHeaderField: "access_token")
+            mutableURLRequest.addValue(FBSDKAccessToken.current().tokenString, forHTTPHeaderField: "access_token")
             mutableURLRequest.addValue("FacebookToken", forHTTPHeaderField: "X-token-type")
             mutableURLRequest.addValue("text/plain", forHTTPHeaderField: "Accept")
             self.sendRequest(mutableURLRequest, onSuccess: onSuccess, onFailure: onFailure)
         case .signedInWithGoogle:
             UserManager.SharedInstance.googleUser?.authentication.getTokensWithHandler({ (auth, error) in
                 guard error == nil else {
-                    onFailure(error: "Failed to get Google access token: \(error.localizedDescription)")
+                    onFailure("Failed to get Google access token: \(error?.localizedDescription)")
                     return
                 }
-                mutableURLRequest.addValue(auth.accessToken, forHTTPHeaderField: "access_token")
+                mutableURLRequest.addValue((auth?.accessToken)!, forHTTPHeaderField: "access_token")
                 mutableURLRequest.addValue("GoogleToken", forHTTPHeaderField: "X-token-type")
                 self.sendRequest(mutableURLRequest, onSuccess: onSuccess, onFailure: onFailure)
             })
         case .signedOut:
-            onFailure(error: "User not signed in")
+            onFailure("User not signed in")
         }
     }
     
-    private func sendRequest (mutableURLRequest: NSMutableURLRequest, onSuccess: (data: String) -> Void, onFailure: (error: String) -> Void) {
-        Alamofire.request(mutableURLRequest).responseString { response in
-            guard let responseValue = response.result.value where response.result.isSuccess == true else {
-                onFailure(error: "Request failed")
+    fileprivate func sendRequest (_ mutableURLRequest: URLRequest, onSuccess: @escaping (_ data: String) -> Void, onFailure: @escaping (_ error: String) -> Void) {
+        Alamofire.request(mutableURLRequest as URLRequestConvertible).responseString { response in
+            guard let responseValue = response.result.value, response.result.isSuccess == true else {
+                onFailure("Request failed")
                 return
             }
-            onSuccess(data: responseValue)
+            onSuccess(responseValue)
         }
     }
 }

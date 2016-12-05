@@ -18,6 +18,8 @@
 import UIKit
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
+
+
     
     @IBOutlet weak var connectingLabel: UILabel!
     
@@ -40,15 +42,15 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = ["public_profile", "email"]
-        fbLoginButton.loginBehavior = FBSDKLoginBehavior.SystemAccount
+        fbLoginButton.loginBehavior = FBSDKLoginBehavior.systemAccount
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        googleLoginButton.colorScheme = GIDSignInButtonColorScheme.Dark
+        googleLoginButton.colorScheme = GIDSignInButtonColorScheme.dark
         
         dataView.text = ""
-        signOutButton.hidden = true
-        credentialsButton.hidden = true
+        signOutButton.isHidden = true
+        credentialsButton.isHidden = true
         
         UserManager.SharedInstance.updateFromUserDefaults()
         switch UserManager.SharedInstance.userAuthenticationState {
@@ -57,29 +59,29 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
                 GIDSignIn.sharedInstance().signInSilently()
             }
         case .signedInWithFacebook:
-            if FBSDKAccessToken.currentAccessToken()?.tokenString != nil {
+            if FBSDKAccessToken.current()?.tokenString != nil {
                 stopLoading()
             }
         case .signedOut: break
         }
     }
     
-    @IBAction func loginTapped(sender: AnyObject) {
+    @IBAction func loginTapped(_ sender: AnyObject) {
         startLoading("Connecting")
     }
     
-    @IBAction func signOutButtonPressed(sender: UIButton) {
+    @IBAction func signOutButtonPressed(_ sender: UIButton) {
         UserManager.SharedInstance.signOut()
-        loginContainer.hidden = false
-        fbLoginButton.hidden = false
+        loginContainer.isHidden = false
+        fbLoginButton.isHidden = false
         fbLoginButton.setNeedsLayout()
-        googleLoginButton.hidden = false
-        signOutButton.hidden = true
-        credentialsButton.hidden = true
+        googleLoginButton.isHidden = false
+        signOutButton.isHidden = true
+        credentialsButton.isHidden = true
         dataView.text = ""
     }
     
-    @IBAction func credentialsButtonPressed(sender: UIButton) {
+    @IBAction func credentialsButtonPressed(_ sender: UIButton) {
         UserManager.SharedInstance.getPrivateData(
             onSuccess: { data in
                 self.dataView.text = data
@@ -93,13 +95,13 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
     /**
      Method to start the loading animation and setup UI for loading
      */
-    func startLoading(connectingMessage: String) {
-        fbLoginButton.hidden = true
-        googleLoginButton.hidden = true
+    func startLoading(_ connectingMessage: String) {
+        fbLoginButton.isHidden = true
+        googleLoginButton.isHidden = true
         loadingIndicator.startAnimating()
-        loadingIndicator.hidden = false
+        loadingIndicator.isHidden = false
         connectingLabel.text = connectingMessage
-        connectingLabel.hidden = false
+        connectingLabel.isHidden = false
     }
     
     /**
@@ -107,19 +109,18 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
      */
     func stopLoading() {
         loadingIndicator.stopAnimating()
-        loadingIndicator.hidden = true
-        connectingLabel.hidden = true
-        fbLoginButton.hidden = true
-        googleLoginButton.hidden = true
-        loginContainer.hidden = true
+        loadingIndicator.isHidden = true
+        connectingLabel.isHidden = true
+        fbLoginButton.isHidden = true
+        googleLoginButton.isHidden = true
+        loginContainer.isHidden = true
         
-        signOutButton.hidden = false
-        credentialsButton.hidden = false
+        signOutButton.isHidden = false
+        credentialsButton.isHidden = false
     }
     
-    
     // Facebook
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print("Unable to authenticate with Facebook. Error=\(error!.localizedDescription)")
         }
@@ -127,15 +128,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         }
         else {
             let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": ""])
-            graphRequest.startWithCompletionHandler() { connection, result, error in
+            graphRequest?.start() { _, result, error in
+                print(result)
                 if error != nil {
                     print("Unable to get Facebook user info: \(error!.localizedDescription)")
                 }
-                else {
-                    let fbId = result.valueForKey("id") as! String
-                    let fbName = result.valueForKey("name") as! String
-                    if(FBSDKAccessToken.currentAccessToken() != nil) {
-                        self.signedInAs(fbName, id: fbId, userState: .signedInWithFacebook)
+                else if let result = result as? [String:String] {
+                    let fbId = result["id"]
+                    let fbName = result["name"]
+                    if(FBSDKAccessToken.current() != nil) {
+                        self.signedInAs(fbName!, id: fbId!, userState: .signedInWithFacebook)
                     } else {
                         print("Unable to get Facebook access token")
                     }
@@ -144,12 +146,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
         }
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
     }
     
-    
+   
     // Google
-    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             print("Unable to get Google user info: \(error!.localizedDescription)")
         }
@@ -157,24 +159,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDel
             let userId = user.userID
             let name = user.profile.name
             UserManager.SharedInstance.googleUser = user
-            self.signedInAs(name, id: userId, userState: .signedInWithGoogle)
+            self.signedInAs(name!, id: userId!, userState: .signedInWithGoogle)
         }
     }
     
-    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!, withError error: NSError!) {
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
     }
     
     
-    func signedInAs(userName: String, id: String, userState: UserManager.UserAuthenticationState) {
+    func signedInAs(_ userName: String, id: String, userState: UserManager.UserAuthenticationState) {
         stopLoading()
 
         UserManager.SharedInstance.userDisplayName = userName
         UserManager.SharedInstance.uniqueUserID = id
         UserManager.SharedInstance.userAuthenticationState = userState
-        NSUserDefaults.standardUserDefaults().setObject(id, forKey: "user_id")
-        NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
-        NSUserDefaults.standardUserDefaults().setObject(userState.rawValue,forKey: "signedInWith")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(id, forKey: "user_id")
+        UserDefaults.standard.set(userName, forKey: "user_name")
+        UserDefaults.standard.set(userState.rawValue,forKey: "signedInWith")
+        UserDefaults.standard.synchronize()
     }
     
 }
