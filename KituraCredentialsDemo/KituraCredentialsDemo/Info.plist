@@ -42,20 +42,20 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.243679408351-8h5q4bioh2tll2ahvu94kd11nut3tpoe</string>
+				<string>&lt;Google REVERSED_CLIENT_ID&gt;</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb199413820454363</string>
+				<string>&lt;Facebook App ID&gt;</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>199413820454363</string>
+	<string>&lt;Facebook App ID&gt;</string>
 	<key>FacebookDisplayName</key>
 	<string>CredentialsDemo</string>
 	<key>LSApplicationCategoryType</key>
@@ -63,7 +63,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
-		<string>com.googleusercontent.apps.243679408351-8h5q4bioh2tll2ahvu94kd11nut3tpoe</string>
+		<string>&lt;Google REVERSED_CLIENT_ID&gt;</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
