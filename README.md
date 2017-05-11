@@ -65,12 +65,12 @@ let googleCallbackUrl = // Put your callback URL here
 
 1. `make run`
 
-  You should see message _Listening on port 8090_. The result executable is located in `.build/debug` directory: `./.build/debug/KituraCredentialsSample`
-2. For Facebook/Google login, open your browser at [http://localhost:8090/private/pages/data](http://localhost:8090/private/pages/data).
+  You should see message _Listening on port 8080_. The result executable is located in `.build/debug` directory: `./.build/debug/KituraCredentialsSample`
+2. For Facebook/Google login, open your browser at [http://localhost:8080/private/pages/data](http://localhost:8080/private/pages/data).
 
-3. For HTTP authentication, open [http://localhost:8090/private/api/data](http://localhost:8090/private/api/data). For this path, Digest authentication will be performed.
+3. For HTTP authentication, open [http://localhost:8080/private/api/data](http://localhost:8080/private/api/data). For this path, Digest authentication will be performed.
 
-4. For HTTP Basic authentication, open your browser at [http://localhost:8090/private/basic/api/data](http://localhost:8090/private/basic/api/data).
+4. For HTTP Basic authentication, open your browser at [http://localhost:8080/private/basic/api/data](http://localhost:8080/private/basic/api/data).
 
 5. For Facebook/Google OAuth token authentication, run KituraCredentialsDemo as explained in the next section.
 

@@ -79,7 +79,7 @@ class UserManager: NSObject {
     }
     
     func getPrivateData(onSuccess: @escaping (_ data: String) -> Void, onFailure: @escaping (_ error: String) -> Void) {
-        let url = "http://localhost:8090/private/api/data"
+        let url = "http://localhost:8080/private/api/data"
         guard let nsURL = URL(string: url) else {
             onFailure("Bad URL")
             return
