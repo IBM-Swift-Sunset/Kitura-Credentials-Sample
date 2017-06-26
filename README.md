@@ -63,7 +63,7 @@ let googleCallbackUrl = // Put your callback URL here
 
 ## Build and run Kitura-Credentials-Sample
 
-1. `make run`
+1. `swift build`
 
   You should see message _Listening on port 8080_. The result executable is located in `.build/debug` directory: `./.build/debug/KituraCredentialsSample`
 2. For Facebook/Google login, open your browser at [http://localhost:8080/private/pages/data](http://localhost:8080/private/pages/data).
