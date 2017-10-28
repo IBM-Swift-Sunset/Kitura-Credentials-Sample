@@ -1,3 +1,6 @@
+// swift-tools-version:4.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
 /**
  * Copyright IBM Corporation 2016, 2017
  *
@@ -18,17 +21,22 @@ import PackageDescription
 
 let package = Package(
     name: "KituraCredentialsSample",
-    targets: [
-        Target(
-            name: "KituraCredentialsSample",
-            dependencies: []
-        )
+    products: [
+      .executable(
+        name: "KituraCredentialsSample",
+        targets:  ["KituraCredentialsSample"]
+      )
     ],
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", majorVersion: 1, minor: 7),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", majorVersion: 1, minor: 7),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", majorVersion: 1, minor: 8),
-        .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 1, minor: 7),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", .upToNextMinor(from: "2.0.0")),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", .upToNextMinor(from: "2.0.0")),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", .upToNextMinor(from: "2.0.0")),
+      .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", .upToNextMajor(from: "1.7.1"))
     ],
-    exclude: ["Makefile", "Package-Builder"])
-
+    targets: [
+      .target(
+        name: "KituraCredentialsSample",
+        dependencies: ["HeliumLogger", "CredentialsFacebook", "CredentialsGoogle", "CredentialsHTTP"]
+      )
+    ]
+)

@@ -1,6 +1,7 @@
 # Kitura-Credentials-Sample
 A sample web application for authentication using Kitura-Credentials
 
+[![Build Status - Master](https://travis-ci.org/IBM-Swift/Kitura-Credentials-Sample.svg?branch=master)](https://travis-ci.org/IBM-Swift/Kitura-Credentials-Sample)
 ![Mac OS X](https://img.shields.io/badge/os-Mac%20OS%20X-green.svg?style=flat)
 ![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)
 ![Apache 2](https://img.shields.io/badge/license-Apache2-blue.svg?style=flat)
@@ -12,6 +13,9 @@ This is a sample [Kitura](https://github.com/IBM-Swift/Kitura) application for a
 This sample shows both redirecting authentication with sessions using Facebook and Google login, and non-redirecting HTTP Basic and Digest authentication, and authentication with Facebook or Google OAuth token.
 
 KituraCredentialsDemo application is a sample iOS application that shows the client side of authentication with OAuth tokens.
+
+## Swift version
+The latest version of Kitura-Credentials-Sample requires **Swift 4.0**. You can download this version of the Swift binaries by following this [link](https://swift.org/download/). Compatibility with other Swift versions is not guaranteed.
 
 ## Table of Contents
 

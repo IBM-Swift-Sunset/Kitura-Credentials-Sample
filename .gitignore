@@ -1,4 +1,5 @@
-KituraCredentialsSample.xcodeproj
-Packages
-.build
+*.xcodeproj/
+Package.resolved
+.build/*
+.build-ubuntu/*
 
