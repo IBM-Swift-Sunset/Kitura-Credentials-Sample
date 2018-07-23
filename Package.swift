@@ -28,15 +28,17 @@ let package = Package(
       )
     ],
     dependencies: [
-      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", .upToNextMinor(from: "2.0.0")),
-      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", .upToNextMinor(from: "2.0.0")),
-      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", .upToNextMinor(from: "2.0.0")),
-      .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", .upToNextMajor(from: "1.7.1"))
+      .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.4.0"),
+      .package(url: "https://github.com/IBM-Swift/SwiftyJSON.git", from: "17.0.0"),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebook.git", from: "2.0.0"),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogle.git", from: "2.0.0"),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", from: "2.0.0"),
+      .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1")
     ],
     targets: [
       .target(
         name: "KituraCredentialsSample",
-        dependencies: ["HeliumLogger", "CredentialsFacebook", "CredentialsGoogle", "CredentialsHTTP"]
+        dependencies: ["Kitura", "SwiftyJSON", "HeliumLogger", "CredentialsFacebook", "CredentialsGoogle", "CredentialsHTTP"]
       )
     ]
 )
