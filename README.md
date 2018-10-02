@@ -1,6 +1,9 @@
 # Kitura-Credentials-Sample
 A sample web application for authentication using Kitura-Credentials
 
+🚫 This project is no longer maintained. 
+Replacement credentials sample can be found as part of [Kitura-Sample](https://github.com/IBM-Swift/Kitura-Sample)
+
 [![Build Status - Master](https://travis-ci.org/IBM-Swift/Kitura-Credentials-Sample.svg?branch=master)](https://travis-ci.org/IBM-Swift/Kitura-Credentials-Sample)
 ![Mac OS X](https://img.shields.io/badge/os-Mac%20OS%20X-green.svg?style=flat)
 ![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)
